@@ -16,7 +16,7 @@ namespace DatingApp.API.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet()]
         public IActionResult GetValues(){
             var values = _context.Values.ToList();
             

@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.API.Controllers
 {
-    [ApiController]
     [Route("[controller]")]
+    [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _repo;
@@ -32,6 +32,15 @@ namespace DatingApp.API.Controllers
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
 
             return StatusCode(201);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
+        {
+            var userFromRepo = _repo.Login(userForLoginDto.Username, userForLoginDto.Password);
+            if(userFromRepo == null)
+                return Unauthorized();
+            return 
         }
     }
 }
