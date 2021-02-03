@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using DatingApp.API.Data;
 using DatingApp.API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class ValuesController : ControllerBase
@@ -17,7 +19,7 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpGet()]
-        public IActionResult GetValues(){
+        public IActionResult Get(){
             var values = _context.Values.ToList();
             
             return Ok(values);
