@@ -54,16 +54,20 @@ namespace DatingApp.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }else{
+            }
+            else
+            {
                 app.UseExceptionHandler(builder => {
                         builder.Run(async context => {
-                            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                            var error = context.Features.Get<IExceptionHandlerFeature>();
-                            if(error != null){
-                                context.Response.AddApplicationError(error.Error.Message);
-                                await context.Response.WriteAsync(error.Error.Message);
-                            }
-                        });
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        if (error != null) 
+                        {
+                            context.Response.AddApplicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+                    });
                 });
             }
             
@@ -71,14 +75,11 @@ namespace DatingApp.API
 
             app.UseRouting();
 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseAuthentication();
             app.UseAuthorization();
             
-            // app.UseAuthentication();
-            
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

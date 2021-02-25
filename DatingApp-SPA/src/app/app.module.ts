@@ -12,7 +12,7 @@ import { AuthService } from './_services/auth.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
 @NgModule({
-  declarations: [				
+  declarations: [
     AppComponent,
     ValueComponent,
       NavComponent,
@@ -27,7 +27,6 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
   providers: [
     AuthService,
     ErrorInterceptorProvider
-
   ],
   bootstrap: [AppComponent]
 })
